@@ -25,7 +25,7 @@ namespace BiletiApp.API.Controllers
             e.Name = "Filip Events";
 
             var b = new Contact();
-            b.Name = "Kamelija Sekulovska";
+            b.Name = "Kamelija Sekulovskaaaa";
 
             DbContext.Add(b);
             DbContext.SaveChanges();
