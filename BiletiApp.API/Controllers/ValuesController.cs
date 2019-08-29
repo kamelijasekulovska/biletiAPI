@@ -22,7 +22,7 @@ namespace BiletiApp.API.Controllers
         public ActionResult<IEnumerable<string>> Get()
         {
             var e = new BiletiEvent();
-            e.Name = "Filip Events";
+            e.Name = "Filip Eventsssss";
 
             var b = new Contact();
             b.Name = "Kamelija Sekulovskaaaa";
