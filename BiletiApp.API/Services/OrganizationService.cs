@@ -18,5 +18,10 @@ namespace BiletiApp.API.Services
         {
             return _organizationRepository.addOrganization(organization);
         }
+
+        public Organization updateOrganization(Organization organization)
+        {
+            return _organizationRepository.updateOrganization(organization);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +22,11 @@ namespace BiletiApp.API.Controllers
         [HttpPost]
         public ActionResult<Organization> addOrganization([FromBody]Organization organization) {
             return _organizationService.addOrganization(organization);
+        }
+
+        [HttpPut]
+        public ActionResult<Organization> updateOrganization([FromBody]Organization organization) {
+            return _organizationService.updateOrganization(organization);
         }
     }
 }
