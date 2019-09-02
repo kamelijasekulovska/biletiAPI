@@ -24,7 +24,7 @@ namespace BiletiApp.API.Controllers
             return _organizationService.addOrganization(organization);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult<Organization> updateOrganization([FromBody]Organization organization) {
             return _organizationService.updateOrganization(organization);
         }

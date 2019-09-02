@@ -24,8 +24,8 @@ namespace BiletiApp.API.Controllers
             return _eventService.addEvent(biletiEvent);
         }
 
-        [HttpPut]
-        public ActionResult<BiletiEvent> updateEvent([FromBody]BiletiEvent biletiEvent) {
+        [HttpPut("{id}")]
+        public ActionResult<BiletiEvent> updateEvent(int id, [FromBody]BiletiEvent biletiEvent) {
             return _eventService.updateEvent(biletiEvent);
         }
     }
