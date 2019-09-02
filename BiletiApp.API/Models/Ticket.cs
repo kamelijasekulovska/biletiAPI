@@ -7,5 +7,6 @@ namespace BiletiApp.API.Models
 {
     public class Ticket
     {
-    }
+
+     }
 }
