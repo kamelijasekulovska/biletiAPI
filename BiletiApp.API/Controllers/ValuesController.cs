@@ -21,14 +21,14 @@ namespace BiletiApp.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            var e = new BiletiEvent();
+            /*var e = new BiletiEvent();
             e.Name = "Filip Eventsssss";
 
             var b = new Contact();
             b.Forname = "Kamelija Sekulovskaaaa";
 
             DbContext.Add(b);
-            DbContext.SaveChanges();
+            DbContext.SaveChanges();*/
             return new string[] { "value1", "value2" };
         }
 
