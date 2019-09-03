@@ -11,7 +11,6 @@ namespace BiletiApp.API.Models
         public BiletiEvent Event { get; set; }
         public int EventId { get; set; }
         public Seat Seat { get; set; }
-        public int SeatId { get; set; }
         public int Price { get; set; }
         public string Barcode { get; set; }
      }

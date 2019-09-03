@@ -24,12 +24,12 @@ namespace BiletiApp.API.Repositories
             return organization;
         }
 
-        public Organization updateOrganization(Organization organization)
-        {
+        public Organization updateOrganization(Organization organization) {
+
             DbContext.Update(organization);
             DbContext.SaveChanges();
 
             return organization;
-        } 
+        }
     }
 }
