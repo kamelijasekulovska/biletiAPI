@@ -20,13 +20,15 @@ namespace BiletiApp.API.Controllers
             _venueService = venueService;
         }
 
+        //Create venue with necessary details
         [HttpPost]
         public ActionResult<Venue> addVenue([FromBody]Venue venue)
         {
             return _venueService.addVenue(venue);
         }
 
-        [HttpPut("{id}")]
+        //Update venue details
+        [HttpPut]
         public ActionResult<Venue> updateVenue([FromBody]Venue venue)
         {
             return _venueService.updateVenue(venue);
