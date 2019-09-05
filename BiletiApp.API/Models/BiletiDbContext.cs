@@ -26,6 +26,7 @@ namespace BiletiApp.API.Models
             base.OnModelCreating(modelBuilder);
         }
 
+       
     }
     public class ContactConfiguration : IEntityTypeConfiguration<Contact>
     {
