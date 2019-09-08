@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using BiletiApp.API.IRepositories;
-using BiletiApp.API.IServices;
 using BiletiApp.API.Models;
-using BiletiApp.API.Repositories;
-using BiletiApp.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,20 +25,12 @@ namespace BiletiApp.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<BiletiDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
-            var builder = new ContainerBuilder();
-            builder.RegisterType<VenueService>().As<IVenueService>();
-            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
-            builder.Populate(services);
-            var container = builder.Build();
-            //Create the IServiceProvider based on the container.
-            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

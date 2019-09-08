@@ -17,6 +17,38 @@ namespace BiletiApp.API.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("BiletiApp.API.Models.BiletiEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Cover");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Max_tickets_per_account");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OrganizationId");
+
+                    b.Property<Guid?>("OrganizationId1");
+
+                    b.Property<int>("VenueId");
+
+                    b.Property<Guid?>("VenueId1");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId1");
+
+                    b.HasIndex("VenueId1");
+
+                    b.ToTable("BiletiEvent","Bileti");
+                });
+
             modelBuilder.Entity("BiletiApp.API.Models.Contact", b =>
                 {
                     b.Property<Guid>("Id")
@@ -28,6 +60,8 @@ namespace BiletiApp.API.Migrations
 
                     b.Property<string>("Forname");
 
+                    b.Property<Guid?>("OrganizationId");
+
                     b.Property<string>("Surname");
 
                     b.Property<string>("Telephone");
@@ -36,9 +70,51 @@ namespace BiletiApp.API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrganizationId");
+
                     b.HasIndex("VenueId");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contact","Bileti");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BiletiEventId");
+
+                    b.Property<Guid?>("OrganizationId");
+
+                    b.Property<string>("Path");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BiletiEventId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Organization", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Cover");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("Enabled");
+
+                    b.Property<string>("Logo");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organization");
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Seat", b =>
@@ -52,13 +128,15 @@ namespace BiletiApp.API.Migrations
 
                     b.Property<int>("Row");
 
-                    b.Property<Guid?>("SectorId");
+                    b.Property<int>("SectorId");
+
+                    b.Property<Guid?>("SectorId1");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SectorId");
+                    b.HasIndex("SectorId1");
 
-                    b.ToTable("Seats");
+                    b.ToTable("Seat");
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Sector", b =>
@@ -82,7 +160,25 @@ namespace BiletiApp.API.Migrations
 
                     b.HasIndex("VenueId");
 
-                    b.ToTable("Sectors");
+                    b.ToTable("Sector");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BiletiEventId");
+
+                    b.Property<string>("Label");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BiletiEventId");
+
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Venue", b =>
@@ -98,21 +194,47 @@ namespace BiletiApp.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Venues");
+                    b.ToTable("Venue");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.BiletiEvent", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.Organization", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId1");
+
+                    b.HasOne("BiletiApp.API.Models.Venue", "Venue")
+                        .WithMany()
+                        .HasForeignKey("VenueId1");
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Contact", b =>
                 {
+                    b.HasOne("BiletiApp.API.Models.Organization")
+                        .WithMany("Contacts")
+                        .HasForeignKey("OrganizationId");
+
                     b.HasOne("BiletiApp.API.Models.Venue")
                         .WithMany("Contacts")
                         .HasForeignKey("VenueId");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Image", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.BiletiEvent")
+                        .WithMany("Images")
+                        .HasForeignKey("BiletiEventId");
+
+                    b.HasOne("BiletiApp.API.Models.Organization")
+                        .WithMany("Gallery")
+                        .HasForeignKey("OrganizationId");
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Seat", b =>
                 {
                     b.HasOne("BiletiApp.API.Models.Sector", "Sector")
                         .WithMany("Seats")
-                        .HasForeignKey("SectorId");
+                        .HasForeignKey("SectorId1");
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Sector", b =>
@@ -120,6 +242,13 @@ namespace BiletiApp.API.Migrations
                     b.HasOne("BiletiApp.API.Models.Venue")
                         .WithMany("Sectors")
                         .HasForeignKey("VenueId");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Tag", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.BiletiEvent")
+                        .WithMany("Tags")
+                        .HasForeignKey("BiletiEventId");
                 });
 #pragma warning restore 612, 618
         }

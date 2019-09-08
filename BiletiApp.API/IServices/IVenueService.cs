@@ -10,6 +10,5 @@ namespace BiletiApp.API.IServices
     {
         Venue addVenue(Venue venue);
         Venue updateVenue(Venue venue);
-        bool deleteVenue(Guid id);
     }
 }

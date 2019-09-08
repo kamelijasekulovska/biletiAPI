@@ -21,24 +21,17 @@ namespace BiletiApp.API.Controllers
         }
 
         //Create venue with necessary details
-        [HttpPost("addVenue")]
+        [HttpPost]
         public ActionResult<Venue> addVenue([FromBody]Venue venue)
         {
             return _venueService.addVenue(venue);
         }
 
         //Update venue details
-        [HttpPut("updateVenue")]
+        [HttpPut]
         public ActionResult<Venue> updateVenue([FromBody]Venue venue)
         {
             return _venueService.updateVenue(venue);
-        }
-
-        //Delete venue by id
-        [HttpDelete("deleteVenue")]
-        public ActionResult<bool> deleteVenue(Guid id)
-        {
-            return _venueService.deleteVenue(id);
         }
     }
 }
