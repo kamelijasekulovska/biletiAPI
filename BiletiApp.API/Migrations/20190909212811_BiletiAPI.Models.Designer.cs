@@ -3,14 +3,16 @@ using System;
 using BiletiApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BiletiApp.API.Migrations
 {
     [DbContext(typeof(BiletiDbContext))]
-    partial class BiletiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190909212811_BiletiAPI.Models")]
+    partial class BiletiAPIModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

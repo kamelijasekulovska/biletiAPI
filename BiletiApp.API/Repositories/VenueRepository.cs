@@ -29,5 +29,19 @@ namespace BiletiApp.API.Repositories
 
             return venue;
         }
+
+        public bool deleteVenue(Guid id)
+        {
+            Venue venue = DbContext.Venues.Where(x => x.Id == id).FirstOrDefault();
+            if (venue != null)
+            {
+                DbContext.Remove(venue);
+                DbContext.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
