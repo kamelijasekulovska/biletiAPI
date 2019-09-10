@@ -12,5 +12,7 @@ namespace BiletiApp.API.IRepositories
         Venue updateVenue(Venue venue);
         bool deleteVenue(Guid id);
         Venue getVenueById(Guid id);
+        List<Venue> getAll();
+        //List<BiletiEvent> getAllEventsByVenue(Guid id);
     }
 }
