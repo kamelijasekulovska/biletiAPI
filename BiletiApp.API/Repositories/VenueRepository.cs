@@ -43,5 +43,11 @@ namespace BiletiApp.API.Repositories
 
             return false;
         }
+        public Venue getVenueById(Guid id)
+        {
+            Venue venue = DbContext.Venues.Where(x => x.Id == id).FirstOrDefault();
+
+            return venue;
+        }
     }
 }

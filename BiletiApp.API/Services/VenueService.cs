@@ -30,5 +30,9 @@ namespace BiletiApp.API.Services
         {
             return _venueRepository.updateVenue(venue);
         }
+        public Venue getVenueById(Guid id)
+        {
+            return _venueRepository.getVenueById(id);
+        }
     }
 }
