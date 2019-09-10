@@ -31,5 +31,18 @@ namespace BiletiApp.API.Repositories
 
             return biletiEvent; 
         }
+        public bool deleteEvent(Guid id)
+        {
+            BiletiEvent biletiEvent = DbContext.BiletiEvents.Where(x => x.Id == id).FirstOrDefault();
+            if (biletiEvent != null)
+            {
+                DbContext.Remove(biletiEvent);
+                DbContext.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

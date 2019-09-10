@@ -20,15 +20,21 @@ namespace BiletiApp.API.Controllers
         }
 
         //Create event with initial details
-        [HttpPost]
+        [HttpPost("addEvent")]
         public ActionResult<BiletiEvent> addEvent([FromBody]BiletiEvent biletiEvent) {
             return _eventService.addEvent(biletiEvent);
         }
 
         //Update event data, tickets, and seats details
-        [HttpPut]
-        public ActionResult<BiletiEvent> updateEvent(int id, [FromBody]BiletiEvent biletiEvent) {
+        [HttpPut("updateEvent")]
+        public ActionResult<BiletiEvent> updateEvent([FromBody]BiletiEvent biletiEvent) {
             return _eventService.updateEvent(biletiEvent);
+        }
+        //Delete event by id
+        [HttpDelete("deleteEvent")]
+        public ActionResult<bool> deleteEvent(Guid id)
+        {
+            return _eventService.deleteEvent(id);
         }
     }
 }
