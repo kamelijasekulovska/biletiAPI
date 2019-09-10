@@ -8,7 +8,7 @@ namespace BiletiApp.API.IRepositories
 {
     public interface ITicketRepository
     {
-       
+        Ticket getTicketById(Guid id);
         
     }
 }

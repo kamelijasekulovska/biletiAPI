@@ -45,6 +45,8 @@ namespace BiletiApp.API
             builder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
             builder.RegisterType<EventService>().As<IEventService>();
             builder.RegisterType<EventRepository>().As<IEventRepository>();
+            builder.RegisterType<TicketService>().As<ITicketService>();
+            builder.RegisterType<TicketRepository>().As<ITicketRepository>();
             builder.Populate(services);
             var container = builder.Build();
             //Create the IServiceProvider based on the container.

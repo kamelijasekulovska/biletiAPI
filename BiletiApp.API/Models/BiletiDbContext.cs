@@ -19,6 +19,7 @@ namespace BiletiApp.API.Models
         public DbSet<Sector> Sectors { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<BiletiEvent> BiletiEvents { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
     }
 

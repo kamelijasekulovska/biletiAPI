@@ -21,6 +21,12 @@ namespace BiletiApp.API.Controllers
             _ticketService = ticketService;
         }
 
-        
+        //Get ticket by id with necessary details
+        [HttpGet("getTicketById/{id}")]
+        public ActionResult<Ticket> getTicketById(Guid id)
+        {
+            return _ticketService.getTicketById(id);
+        }
+
     }
 } 

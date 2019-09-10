@@ -16,7 +16,12 @@ namespace BiletiApp.API.Repositories
             DbContext = dbContext;
         }
 
-        
+        public Ticket getTicketById(Guid id)
+        {
+            Ticket ticket = DbContext.Tickets.Where(x => x.Id == id).FirstOrDefault();
+
+            return ticket;
+        }
 
     }
 }
