@@ -37,7 +37,7 @@ namespace BiletiApp.API.Controllers
         }
 
         //Delete organization by id
-        [HttpDelete("deleteOrganization")]
+        [HttpDelete("deleteOrganization/{id}")]
         public ActionResult<bool> deleteOrganization(Guid id)
         {
             return _organizationService.deleteOrganization(id);

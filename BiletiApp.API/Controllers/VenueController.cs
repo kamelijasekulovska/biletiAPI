@@ -35,7 +35,7 @@ namespace BiletiApp.API.Controllers
         }
 
         //Delete venue by id
-        [HttpDelete("deleteVenue")]
+        [HttpDelete("deleteVenue/{id}")]
         public ActionResult<bool> deleteVenue(Guid id)
         {
             return _venueService.deleteVenue(id);

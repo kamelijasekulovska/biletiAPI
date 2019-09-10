@@ -31,7 +31,7 @@ namespace BiletiApp.API.Controllers
             return _eventService.updateEvent(biletiEvent);
         }
         //Delete event by id
-        [HttpDelete("deleteEvent")]
+        [HttpDelete("deleteEvent/{id}")]
         public ActionResult<bool> deleteEvent(Guid id)
         {
             return _eventService.deleteEvent(id);

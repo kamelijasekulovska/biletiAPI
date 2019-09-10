@@ -17,6 +17,34 @@ namespace BiletiApp.API.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("BiletiApp.API.Models.BiletiEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Cover");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Max_tickets_per_account");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("OrganizationId");
+
+                    b.Property<Guid?>("VenueId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.HasIndex("VenueId");
+
+                    b.ToTable("BiletiEvents");
+                });
+
             modelBuilder.Entity("BiletiApp.API.Models.Contact", b =>
                 {
                     b.Property<Guid>("Id")
@@ -50,11 +78,15 @@ namespace BiletiApp.API.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<Guid?>("BiletiEventId");
+
                     b.Property<Guid?>("OrganizationId");
 
                     b.Property<string>("Path");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BiletiEventId");
 
                     b.HasIndex("OrganizationId");
 
@@ -125,6 +157,24 @@ namespace BiletiApp.API.Migrations
                     b.ToTable("Sectors");
                 });
 
+            modelBuilder.Entity("BiletiApp.API.Models.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BiletiEventId");
+
+                    b.Property<string>("Label");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BiletiEventId");
+
+                    b.ToTable("Tag");
+                });
+
             modelBuilder.Entity("BiletiApp.API.Models.Venue", b =>
                 {
                     b.Property<Guid>("Id")
@@ -141,6 +191,17 @@ namespace BiletiApp.API.Migrations
                     b.ToTable("Venues");
                 });
 
+            modelBuilder.Entity("BiletiApp.API.Models.BiletiEvent", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.Organization", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId");
+
+                    b.HasOne("BiletiApp.API.Models.Venue", "Venue")
+                        .WithMany()
+                        .HasForeignKey("VenueId");
+                });
+
             modelBuilder.Entity("BiletiApp.API.Models.Contact", b =>
                 {
                     b.HasOne("BiletiApp.API.Models.Organization")
@@ -154,6 +215,10 @@ namespace BiletiApp.API.Migrations
 
             modelBuilder.Entity("BiletiApp.API.Models.Image", b =>
                 {
+                    b.HasOne("BiletiApp.API.Models.BiletiEvent")
+                        .WithMany("Images")
+                        .HasForeignKey("BiletiEventId");
+
                     b.HasOne("BiletiApp.API.Models.Organization")
                         .WithMany("Gallery")
                         .HasForeignKey("OrganizationId");
@@ -171,6 +236,13 @@ namespace BiletiApp.API.Migrations
                     b.HasOne("BiletiApp.API.Models.Venue")
                         .WithMany("Sectors")
                         .HasForeignKey("VenueId");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Tag", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.BiletiEvent")
+                        .WithMany("Tags")
+                        .HasForeignKey("BiletiEventId");
                 });
 #pragma warning restore 612, 618
         }
