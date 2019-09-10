@@ -14,6 +14,11 @@ namespace BiletiApp.API.Services
         public OrganizationService(IOrganizationRepository organizationRepository) {
             _organizationRepository = organizationRepository;
         }
+
+        public Organization getOrganizationById(Guid id)
+        {
+            return _organizationRepository.getOrganizationById(id);
+        }
         public Organization addOrganization(Organization organization)
         {
             return _organizationRepository.addOrganization(organization);
@@ -22,6 +27,11 @@ namespace BiletiApp.API.Services
         public Organization updateOrganization(Organization organization)
         {
             return _organizationRepository.updateOrganization(organization);
+        }
+
+        public bool deleteOrganization(Guid id)
+        {
+            return _organizationRepository.deleteOrganization(id);
         }
     }
 }

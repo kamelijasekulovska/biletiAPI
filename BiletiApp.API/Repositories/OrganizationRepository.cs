@@ -16,6 +16,11 @@ namespace BiletiApp.API.Repositories
             DbContext = dbContext;
         }
 
+        public Organization getOrganizationById(Guid id) {
+            Organization organization = DbContext.Organizations.Where(x => x.Id == id).FirstOrDefault();
+
+            return organization;
+        }
         public Organization addOrganization(Organization organization)
         {
             DbContext.Add(organization);
@@ -31,5 +36,20 @@ namespace BiletiApp.API.Repositories
 
             return organization;
         }
+
+        public bool deleteOrganization(Guid id)
+        {
+            Organization organization = DbContext.Organizations.Where(x => x.Id == id).FirstOrDefault();
+            if (organization != null)
+            {
+                DbContext.Remove(organization);
+                DbContext.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

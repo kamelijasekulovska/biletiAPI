@@ -19,16 +19,28 @@ namespace BiletiApp.API.Controllers
             _organizationService = organizationService;
         }
 
+        [HttpGet("getOrganizationById")]
+        public ActionResult<Organization> getOrganizationById(Guid id) {
+            return _organizationService.getOrganizationById(id);
+        }
+
         //Create organization with necessary details
-        [HttpPost]
+        [HttpPost("addOrganization")]
         public ActionResult<Organization> addOrganization([FromBody]Organization organization) {
             return _organizationService.addOrganization(organization);
         }
 
         //Update details for specific organization
-        [HttpPut]
+        [HttpPut("updateOrganization")]
         public ActionResult<Organization> updateOrganization([FromBody]Organization organization) {
             return _organizationService.updateOrganization(organization);
+        }
+
+        //Delete organization by id
+        [HttpDelete("deleteOrganization")]
+        public ActionResult<bool> deleteOrganization(Guid id)
+        {
+            return _organizationService.deleteOrganization(id);
         }
     }
 }

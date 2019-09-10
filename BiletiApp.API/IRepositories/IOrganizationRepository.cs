@@ -8,7 +8,9 @@ namespace BiletiApp.API.IRepositories
 {
     public interface IOrganizationRepository
     {
+        Organization getOrganizationById(Guid id);
         Organization addOrganization(Organization organization);
         Organization updateOrganization(Organization organization);
+        bool deleteOrganization(Guid id);
     }
 }
