@@ -42,7 +42,7 @@ namespace BiletiApp.API.Controllers
         }
 
         //Get venue by id
-        [HttpGet("getVenueById")]
+        [HttpGet("getVenueById/{id}")]
         public ActionResult<Venue> getVenueById(Guid id)
         {
             return _venueService.getVenueById(id);
