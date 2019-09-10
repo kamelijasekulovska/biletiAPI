@@ -44,5 +44,12 @@ namespace BiletiApp.API.Repositories
 
             return false;
         }
+
+        public BiletiEvent getEventById(Guid id)
+        {
+            BiletiEvent biletiEvent = DbContext.BiletiEvents.Where(x => x.Id == id).FirstOrDefault();
+          
+            return biletiEvent;
+        }
     }
 }

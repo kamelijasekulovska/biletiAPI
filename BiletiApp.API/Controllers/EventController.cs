@@ -36,5 +36,11 @@ namespace BiletiApp.API.Controllers
         {
             return _eventService.deleteEvent(id);
         }
+        //Get event by id
+        [HttpGet("getEventById")]
+        public ActionResult<BiletiEvent> getEventById(Guid id)
+        {
+            return _eventService.getEventById(id);
+        }
     }
 }

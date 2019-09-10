@@ -31,6 +31,11 @@ namespace BiletiApp.API.Services
             return _eventRepository.deleteEvent(id);
         }
 
+        public BiletiEvent getEventById(Guid id)
+        {
+            return _eventRepository.getEventById(id);
+        }
+
 
     }
 }
