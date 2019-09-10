@@ -50,6 +50,11 @@ namespace BiletiApp.API.Repositories
 
             return false;
         }
+        public List<Organization> getAll()
+        {
+            List<Organization> organizations = DbContext.Organizations.ToList();
+            return organizations;
+        }
 
     }
 }

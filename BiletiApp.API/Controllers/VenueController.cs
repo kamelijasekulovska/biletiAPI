@@ -48,6 +48,7 @@ namespace BiletiApp.API.Controllers
             return _venueService.getVenueById(id);
         }
 
+        //List all available venues
         [HttpGet("getAll")]
         public ActionResult<List<Venue>> getAll()
         {

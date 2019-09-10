@@ -42,5 +42,12 @@ namespace BiletiApp.API.Controllers
         {
             return _eventService.getEventById(id);
         }
+
+        //List all available events
+        [HttpGet("getAll")]
+        public ActionResult<List<BiletiEvent>> getAll()
+        {
+            return _eventService.getAll();
+        }
     }
 }

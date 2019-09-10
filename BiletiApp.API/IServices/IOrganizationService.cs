@@ -12,5 +12,6 @@ namespace BiletiApp.API.IServices
         Organization addOrganization(Organization organization);
         Organization updateOrganization(Organization organization);
         bool deleteOrganization(Guid id);
+        List<Organization> getAll();
     }
 }

@@ -12,5 +12,6 @@ namespace BiletiApp.API.IServices
         BiletiEvent updateEvent(BiletiEvent biletiEvent);
         bool deleteEvent(Guid id);
         BiletiEvent getEventById(Guid id);
+        List<BiletiEvent> getAll();
     }
 }

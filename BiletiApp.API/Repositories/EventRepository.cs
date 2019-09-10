@@ -51,5 +51,10 @@ namespace BiletiApp.API.Repositories
           
             return biletiEvent;
         }
+        public List<BiletiEvent> getAll()
+        {
+            List<BiletiEvent> biletiEvents = DbContext.BiletiEvents.ToList();
+            return biletiEvents;
+        }
     }
 }

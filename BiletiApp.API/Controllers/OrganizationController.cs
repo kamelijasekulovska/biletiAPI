@@ -42,5 +42,12 @@ namespace BiletiApp.API.Controllers
         {
             return _organizationService.deleteOrganization(id);
         }
+
+        //List all available organizations
+        [HttpGet("getAll")]
+        public ActionResult<List<Organization>> getAll()
+        {
+            return _organizationService.getAll();
+        }
     }
 }

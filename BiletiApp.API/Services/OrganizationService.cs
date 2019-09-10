@@ -33,5 +33,9 @@ namespace BiletiApp.API.Services
         {
             return _organizationRepository.deleteOrganization(id);
         }
+        public List<Organization> getAll()
+        {
+            return _organizationRepository.getAll();
+        }
     }
 }
