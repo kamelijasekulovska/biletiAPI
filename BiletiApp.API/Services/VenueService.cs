@@ -39,5 +39,9 @@ namespace BiletiApp.API.Services
         {
             return _venueRepository.getAll();
         }
+        public List<BiletiEvent> getAllEventsForSpecificVenue(Guid id)
+        {
+            return _venueRepository.getAllEventsForSpecificVenue(id);
+        }
     }
 }

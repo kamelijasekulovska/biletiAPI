@@ -49,5 +49,12 @@ namespace BiletiApp.API.Controllers
         {
             return _organizationService.getAll();
         }
+
+        //Get all events by orgaization
+        [HttpGet("getAllEventsForSpecificOrganization/{id}")]
+        public ActionResult<List<BiletiEvent>> getAllEventsForSpecificOrganization(Guid id)
+        {
+            return _organizationService.getAllEventsForSpecificOrganization(id);
+        }
     }
 }

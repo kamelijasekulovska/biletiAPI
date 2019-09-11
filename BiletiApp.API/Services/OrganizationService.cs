@@ -37,5 +37,10 @@ namespace BiletiApp.API.Services
         {
             return _organizationRepository.getAll();
         }
+
+        public List<BiletiEvent> getAllEventsForSpecificOrganization(Guid id)
+        {
+            return _organizationRepository.getAllEventsForSpecificOrganization(id);
+        }
     }
 }

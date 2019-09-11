@@ -55,9 +55,11 @@ namespace BiletiApp.API.Controllers
             return _venueService.getAll();
         }
 
-        /*[HttpGet("getAllEventsByVenue/{id}")]
-        public ActionResult<List<BiletiEvent>> getAllEventsByVenue(Guid id) {
-            return _venueService.getAllEventsByVenue(id);
-        }*/
+        //Get list of events by venue
+        [HttpGet("getAllEventsForSpecificVenue/{id}")]
+        public ActionResult<List<BiletiEvent>> getAllEventsForSpecificVenue(Guid id) {
+
+            return _venueService.getAllEventsForSpecificVenue(id);
+        }
     }
 }

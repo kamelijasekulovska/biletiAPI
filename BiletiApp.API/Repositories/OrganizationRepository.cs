@@ -56,5 +56,11 @@ namespace BiletiApp.API.Repositories
             return organizations;
         }
 
+        public List<BiletiEvent> getAllEventsForSpecificOrganization(Guid id)
+        {
+            List<BiletiEvent> events = DbContext.BiletiEvents.Where(x => x.Organization.Id == id).ToList();
+            return events;
+        }
+
     }
 }

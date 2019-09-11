@@ -13,5 +13,6 @@ namespace BiletiApp.API.IRepositories
         Organization updateOrganization(Organization organization);
         bool deleteOrganization(Guid id);
         List<Organization> getAll();
+        List<BiletiEvent> getAllEventsForSpecificOrganization(Guid id);
     }
 }
