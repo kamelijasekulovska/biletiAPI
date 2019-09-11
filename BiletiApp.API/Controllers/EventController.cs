@@ -49,5 +49,12 @@ namespace BiletiApp.API.Controllers
         {
             return _eventService.getAll();
         }
+
+        //List all ticket per event
+        [HttpGet("getAllTicketsForSpecificEvent/{id}")]
+        public ActionResult<List<Ticket>> getAllTicketsForSpecificEvent(Guid id)
+        {
+            return _eventService.getAllTicketsForSpecificEvent(id);
+        }
     }
 }

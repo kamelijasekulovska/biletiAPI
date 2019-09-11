@@ -13,5 +13,6 @@ namespace BiletiApp.API.IRepositories
         bool deleteEvent(Guid id);
         BiletiEvent getEventById(Guid id);
         List<BiletiEvent> getAll();
+        List<Ticket> getAllTicketsForSpecificEvent(Guid id);
     }
 }
