@@ -21,5 +21,10 @@ namespace BiletiApp.API.Services
         {
             return _ticketRepository.getTicketById(id);
         }
+
+        public Ticket addTicket(Ticket ticket)
+        {
+            return _ticketRepository.addTicket(ticket);
+        }
     }
 }

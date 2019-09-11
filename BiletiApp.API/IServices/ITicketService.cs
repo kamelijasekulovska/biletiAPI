@@ -9,5 +9,6 @@ namespace BiletiApp.API.IServices
     public interface ITicketService
     {
         Ticket getTicketById(Guid id);
+        Ticket addTicket(Ticket ticket);
     }
 }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiletiApp.API.Migrations
 {
     [DbContext(typeof(BiletiDbContext))]
-    [Migration("20190910100240_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190911083814_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -177,6 +177,70 @@ namespace BiletiApp.API.Migrations
                     b.ToTable("Tag");
                 });
 
+            modelBuilder.Entity("BiletiApp.API.Models.Ticket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Barcode");
+
+                    b.Property<Guid?>("EventId");
+
+                    b.Property<int>("Price");
+
+                    b.Property<Guid?>("SeatId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("SeatId");
+
+                    b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Transaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("TicketId");
+
+                    b.Property<int>("TransactionStatus");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("ContactId");
+
+                    b.Property<Guid?>("OrganizationId");
+
+                    b.Property<string>("Password");
+
+                    b.Property<int>("UserRole");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContactId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("BiletiApp.API.Models.Venue", b =>
                 {
                     b.Property<Guid>("Id")
@@ -245,6 +309,39 @@ namespace BiletiApp.API.Migrations
                     b.HasOne("BiletiApp.API.Models.BiletiEvent")
                         .WithMany("Tags")
                         .HasForeignKey("BiletiEventId");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Ticket", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.BiletiEvent", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId");
+
+                    b.HasOne("BiletiApp.API.Models.Seat", "Seat")
+                        .WithMany()
+                        .HasForeignKey("SeatId");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.Transaction", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.Ticket", "Ticket")
+                        .WithMany()
+                        .HasForeignKey("TicketId");
+
+                    b.HasOne("BiletiApp.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("BiletiApp.API.Models.User", b =>
+                {
+                    b.HasOne("BiletiApp.API.Models.Contact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId");
+
+                    b.HasOne("BiletiApp.API.Models.Organization", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId");
                 });
 #pragma warning restore 612, 618
         }

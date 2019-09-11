@@ -28,5 +28,10 @@ namespace BiletiApp.API.Controllers
             return _ticketService.getTicketById(id);
         }
 
+        [HttpPost("addTicket")]
+        public ActionResult<Ticket> addTicket(Ticket ticket)
+        {
+            return _ticketService.addTicket(ticket);
+        }
     }
 } 

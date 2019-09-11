@@ -182,9 +182,7 @@ namespace BiletiApp.API.Migrations
 
                     b.Property<string>("Barcode");
 
-                    b.Property<int>("EventId");
-
-                    b.Property<Guid?>("EventId1");
+                    b.Property<Guid?>("EventId");
 
                     b.Property<int>("Price");
 
@@ -192,7 +190,7 @@ namespace BiletiApp.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId1");
+                    b.HasIndex("EventId");
 
                     b.HasIndex("SeatId");
 
@@ -315,7 +313,7 @@ namespace BiletiApp.API.Migrations
                 {
                     b.HasOne("BiletiApp.API.Models.BiletiEvent", "Event")
                         .WithMany()
-                        .HasForeignKey("EventId1");
+                        .HasForeignKey("EventId");
 
                     b.HasOne("BiletiApp.API.Models.Seat", "Seat")
                         .WithMany()

@@ -23,5 +23,12 @@ namespace BiletiApp.API.Repositories
             return ticket;
         }
 
+        public Ticket addTicket(Ticket ticket)
+        {
+            DbContext.Add(ticket);
+            DbContext.SaveChanges();
+
+            return ticket;
+        }
     }
 }
