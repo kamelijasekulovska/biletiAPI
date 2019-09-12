@@ -15,18 +15,23 @@ namespace BiletiApp.API.Services
         {
             _userRepository = userRepository;
         }
-        public User registerUser(User user)
+        public User registerUser(string email, string password, Organization organization)
         {
-            return _userRepository.registerUser(user);
+            return _userRepository.registerUser(email, password, organization);
         } 
-        public User updateUser(User user)
+        public bool updateUser(User user)
         {
             return _userRepository.updateUser(user);
         }
 
-        public User login(User user)
+        public User login(string email, string password)
         {
-            return _userRepository.login(user);
+            return _userRepository.login(email, password);
+        }
+
+        public bool deleteUser(Guid id)
+        {
+            return _userRepository.deleteUser(id);
         }
     }
 }

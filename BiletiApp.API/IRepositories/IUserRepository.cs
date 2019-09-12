@@ -9,9 +9,11 @@ namespace BiletiApp.API.IRepositories
 {
    public interface IUserRepository
     {
-        User registerUser(User user);
-        User updateUser(User user);
-        User login(User user);
-       
+        User registerUser(string email, string password, Organization organization);
+        User login(string email, string password);
+        bool updateUser(User user);
+        bool deleteUser(Guid id);
+
+
     }
 }

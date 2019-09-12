@@ -26,6 +26,12 @@ namespace BiletiApp.API.Repositories
         public Ticket addTicket(Ticket ticket)
         {
             DbContext.Add(ticket);
+
+            Transaction transaction = new Transaction();
+            transaction.Ticket = ticket;
+            transaction.TransactionStatus = TransactionStatus.Available;
+            DbContext.Transactions.Add(transaction);
+
             DbContext.SaveChanges();
 
             return ticket;
@@ -33,8 +39,34 @@ namespace BiletiApp.API.Repositories
 
         public bool reserveTicket(Transaction transaction)
         {
+            transaction = DbContext.Transactions.Where(x => x.Id == transaction.Id).FirstOrDefault();
             transaction.TransactionStatus = TransactionStatus.Pending;
-            DbContext.Transactions.Add(transaction);
+            DbContext.SaveChanges();
+
+            return true;
+        }
+
+        public bool purchaseTicket(Transaction transaction)
+        {
+            transaction = DbContext.Transactions.Where(x => x.Id == transaction.Id).FirstOrDefault();
+            transaction.TransactionStatus = TransactionStatus.Confirmed;
+            DbContext.SaveChanges();
+
+            return true;
+        }
+
+        public bool invite(Ticket ticket, string email)
+        {
+            //prashalnici?????
+            return true;
+        }
+
+        public bool confirm(Ticket ticket) 
+        {
+            Guid id = ticket.Id;
+            Transaction transaction = DbContext.Transactions.Where(x => x.Ticket.Id == id).FirstOrDefault();
+            transaction.TransactionStatus = TransactionStatus.Confirmed;
+
             DbContext.SaveChanges();
 
             return true;

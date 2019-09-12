@@ -39,5 +39,23 @@ namespace BiletiApp.API.Controllers
         {
             return _ticketService.reserveTicket(transaction);
         }
+
+        [HttpPost("purchaseTicket")]
+        public ActionResult<bool> purchaseTicket(Transaction transaction)
+        {
+            return _ticketService.purchaseTicket(transaction);
+        }
+
+        [HttpPost("invite")]
+        public ActionResult<bool> invite(Ticket ticket, string email)
+        {
+            return _ticketService.invite(ticket, email);
+        }
+
+        [HttpPost("confirm")]
+        public ActionResult<bool> confirm(Ticket ticket)
+        {
+            return _ticketService.confirm(ticket);
+        }
     }
 } 

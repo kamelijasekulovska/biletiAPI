@@ -11,5 +11,8 @@ namespace BiletiApp.API.IRepositories
         Ticket getTicketById(Guid id);
         Ticket addTicket(Ticket ticket);
         bool reserveTicket(Transaction transaction);
+        bool purchaseTicket(Transaction transaction);
+        bool invite(Ticket ticket, string email);
+        bool confirm(Ticket ticket);
     }
 }

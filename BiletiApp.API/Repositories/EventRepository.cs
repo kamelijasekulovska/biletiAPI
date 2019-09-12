@@ -58,6 +58,8 @@ namespace BiletiApp.API.Repositories
         }
 
         public List<Ticket> getAllTicketsForSpecificEvent(Guid id) {
+            //List<Transaction> transactions = DbContext.Transactions.Where(x => x.TransactionStatus == TransactionStatus.Available && ...).ToList();
+
             List<Ticket> tickets = DbContext.Tickets.Where(x => x.Event.Id == id).ToList();
 
             return tickets;

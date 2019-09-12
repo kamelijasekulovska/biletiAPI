@@ -39,6 +39,8 @@ namespace BiletiApp.API
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             var builder = new ContainerBuilder();
+            builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<VenueService>().As<IVenueService>();
             builder.RegisterType<VenueRepository>().As<IVenueRepository>();
             builder.RegisterType<OrganizationService>().As<IOrganizationService>();

@@ -22,25 +22,33 @@ namespace BiletiApp.API.Controllers
         }
 
         // User registration / organizations user registration
-        [HttpPost]
-        public ActionResult<User> registerUser([FromBody]User user)
+        [HttpPost("registerUser")]
+        public ActionResult<User> registerUser(string email, string password, [FromBody]Organization organization)
         {
-            return _userService.registerUser(user);
+            return _userService.registerUser(email, password, organization);
+        }
+        //User login and token issuing
+        [HttpPost("login")]
+        public ActionResult<User> login(string email, string password)
+        {
+            return _userService.login(email, password);
         }
 
         // Update user details
-        [HttpPut]
-        public ActionResult<User> updateUser([FromBody]User user)
+        [HttpPut("updateUser")]
+        public ActionResult<bool> updateUser([FromBody]User user)
         {
             return _userService.updateUser(user);
         }
 
-        //User login and token issuing
-        [HttpPost]
-        public ActionResult<User> login([FromBody]User user)
+        //Delete user by id
+        [HttpDelete("deleteUser/{id}")]
+        public ActionResult<bool> deleteUser(Guid id)
         {
-            return _userService.login(user);
+            return _userService.deleteUser(id);
         }
+
+
 
     }
 }
