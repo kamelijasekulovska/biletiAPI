@@ -26,5 +26,10 @@ namespace BiletiApp.API.Services
         {
             return _ticketRepository.addTicket(ticket);
         }
+
+        public bool reserveTicket(Transaction transaction)
+        {
+            return _ticketRepository.reserveTicket(transaction);
+        }
     }
 }

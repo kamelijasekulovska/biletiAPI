@@ -33,5 +33,11 @@ namespace BiletiApp.API.Controllers
         {
             return _ticketService.addTicket(ticket);
         }
+
+        [HttpPost("reserveTicket")]
+        public ActionResult<bool> reserveTicket(Transaction transaction)
+        {
+            return _ticketService.reserveTicket(transaction);
+        }
     }
 } 

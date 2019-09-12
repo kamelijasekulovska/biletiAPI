@@ -10,5 +10,6 @@ namespace BiletiApp.API.IServices
     {
         Ticket getTicketById(Guid id);
         Ticket addTicket(Ticket ticket);
+        bool reserveTicket(Transaction transaction);
     }
 }

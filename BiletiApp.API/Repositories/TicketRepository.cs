@@ -30,5 +30,14 @@ namespace BiletiApp.API.Repositories
 
             return ticket;
         }
+
+        public bool reserveTicket(Transaction transaction)
+        {
+            transaction.TransactionStatus = TransactionStatus.Pending;
+            DbContext.Transactions.Add(transaction);
+            DbContext.SaveChanges();
+
+            return true;
+        }
     }
 }
