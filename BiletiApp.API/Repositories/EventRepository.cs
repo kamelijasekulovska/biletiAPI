@@ -18,6 +18,8 @@ namespace BiletiApp.API.Repositories
 
         public BiletiEvent addEvent(BiletiEvent biletiEvent)
         {
+            var organization = DbContext.Organizations.Where(x => x.Id == biletiEvent.Organization.Id).FirstOrDefault();
+            biletiEvent.Organization = organization;
             DbContext.Add(biletiEvent);
             DbContext.SaveChanges();
 
