@@ -11,8 +11,8 @@ namespace BiletiApp.API.Models
         public Guid Id { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        public Tag[] Tags { get; set; }
-        public Image[] Images { get; set; }
+        public ICollection<Tag> Tags { get; set; }
+        public ICollection<Image> Images { get; set; }
         public string Cover { get; set; }
         public int Max_tickets_per_account { get; set; }
         public Organization Organization { get; set; } 

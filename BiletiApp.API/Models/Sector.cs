@@ -13,6 +13,6 @@ namespace BiletiApp.API.Models
         public Boolean Seated { get; set; }
         public int Capacity { get; set; }
         public int Rows { get; set; }
-        public Seat[] Seats { get; set; }
+        public ICollection<Seat> Seats { get; set; }
     }
 }

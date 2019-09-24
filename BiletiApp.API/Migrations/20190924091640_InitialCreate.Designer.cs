@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiletiApp.API.Migrations
 {
     [DbContext(typeof(BiletiDbContext))]
-    [Migration("20190920121031_InitialCreate")]
+    [Migration("20190924091640_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
