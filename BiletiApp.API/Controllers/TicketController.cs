@@ -6,6 +6,8 @@ using BiletiApp.API.IServices;
 using BiletiApp.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace BiletiApp.API.Controllers
 {
@@ -44,6 +46,24 @@ namespace BiletiApp.API.Controllers
         [HttpPost("invite")]
         public ActionResult<bool> invite(Ticket ticket, string email)
         {
+           
+            void Main()
+            {
+                Execute().Wait();
+            }
+                async Task Execute()
+            {
+                var apiKey = Environment.GetEnvironmentVariable("ticket");
+                var client = new SendGridClient(apiKey);
+                var from = new EmailAddress("test@example.com", "Example User");
+                var subject = "Sending with SendGrid is Fun";
+                var to = new EmailAddress("test@example.com", "Example User");
+                var plainTextContent = "and easy to do anywhere, even with C#";
+                var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                var response = await client.SendEmailAsync(msg);
+            }
+
             return _ticketService.invite(ticket, email);
         }
 
