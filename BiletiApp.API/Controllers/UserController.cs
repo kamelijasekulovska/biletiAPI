@@ -38,7 +38,19 @@ namespace BiletiApp.API.Controllers
         [HttpPut("updateUser")]
         public ActionResult<bool> updateUser([FromBody]User user)
         {
-            return _userService.updateUser(user);
+            try
+            {
+                if(user == null)
+                {
+                    return BadRequest("User object is null");
+                }
+                return _userService.updateUser(user);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500,"Internal server error");
+            }
+            
         }
 
         //Delete user by id

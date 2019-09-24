@@ -12,7 +12,7 @@ namespace BiletiApp.API.Models
         public int Number { get; set; }
         public int Row { get; set; }
         public Boolean Enabled { get; set; }  
-        public Sector Sector { get; set; }
+        
 
 
     }

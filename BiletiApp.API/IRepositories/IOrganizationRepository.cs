@@ -8,11 +8,11 @@ namespace BiletiApp.API.IRepositories
 {
     public interface IOrganizationRepository
     {
-        Organization getOrganizationById(Guid id);
         Organization addOrganization(Organization organization);
+        Organization getOrganizationById(Guid id);
+        List<Organization> getAllOrganizations();
         Organization updateOrganization(Organization organization);
-        bool deleteOrganization(Guid id);
-        List<Organization> getAll();
+        bool deleteOrganization(Guid id);  
         List<BiletiEvent> getAllEventsForSpecificOrganization(Guid id);
     }
 }

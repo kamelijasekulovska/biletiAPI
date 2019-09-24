@@ -8,8 +8,9 @@ namespace BiletiApp.API.IServices
 {
     public interface ITicketService
     {
-        Ticket getTicketById(Guid id);
+        
         Ticket addTicket(Ticket ticket);
+        Ticket getTicketById(Guid id);
         bool reserveTicket(Transaction transaction);
         bool purchaseTicket(Transaction transaction);
         bool invite(Ticket ticket, string email);

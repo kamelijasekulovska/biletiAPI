@@ -22,6 +22,19 @@ namespace BiletiApp.API.Repositories
             return venue;
         }
 
+        public Venue getVenueById(Guid id)
+        {
+            Venue venue = DbContext.Venues.Where(x => x.Id == id).FirstOrDefault();
+
+            return venue;
+        }
+
+        public List<Venue> getAllVenues()
+        {
+            List<Venue> venues = DbContext.Venues.ToList();
+            return venues;
+        }
+
         public Venue updateVenue(Venue venue)
         {
             DbContext.Update(venue);
@@ -43,18 +56,7 @@ namespace BiletiApp.API.Repositories
 
             return false;
         }
-        public Venue getVenueById(Guid id)
-        {
-            Venue venue = DbContext.Venues.Where(x => x.Id == id).FirstOrDefault();
-
-            return venue;
-        }
-
-        public List<Venue> getAll()
-        {
-            List<Venue> venues = DbContext.Venues.ToList();
-            return venues;
-        }
+       
 
         public List<BiletiEvent> getAllEventsForSpecificVenue(Guid id)
         {

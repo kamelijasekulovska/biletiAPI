@@ -15,13 +15,19 @@ namespace BiletiApp.API.Services
             _organizationRepository = organizationRepository;
         }
 
+        
+        public Organization addOrganization(Organization organization)
+        {
+            return _organizationRepository.addOrganization(organization);
+        }
         public Organization getOrganizationById(Guid id)
         {
             return _organizationRepository.getOrganizationById(id);
         }
-        public Organization addOrganization(Organization organization)
+
+        public List<Organization> getAllOrganizations()
         {
-            return _organizationRepository.addOrganization(organization);
+            return _organizationRepository.getAllOrganizations();
         }
 
         public Organization updateOrganization(Organization organization)
@@ -33,10 +39,7 @@ namespace BiletiApp.API.Services
         {
             return _organizationRepository.deleteOrganization(id);
         }
-        public List<Organization> getAll()
-        {
-            return _organizationRepository.getAll();
-        }
+        
 
         public List<BiletiEvent> getAllEventsForSpecificOrganization(Guid id)
         {

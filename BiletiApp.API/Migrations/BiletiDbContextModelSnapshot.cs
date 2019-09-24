@@ -236,7 +236,7 @@ namespace BiletiApp.API.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Venue", b =>
@@ -259,22 +259,26 @@ namespace BiletiApp.API.Migrations
                 {
                     b.HasOne("BiletiApp.API.Models.Organization", "Organization")
                         .WithMany()
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BiletiApp.API.Models.Venue", "Venue")
                         .WithMany()
-                        .HasForeignKey("VenueId");
+                        .HasForeignKey("VenueId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Contact", b =>
                 {
                     b.HasOne("BiletiApp.API.Models.Organization")
                         .WithMany("Contacts")
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("BiletiApp.API.Models.Venue")
                         .WithMany("Contacts")
-                        .HasForeignKey("VenueId");
+                        .HasForeignKey("VenueId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Image", b =>
@@ -285,21 +289,24 @@ namespace BiletiApp.API.Migrations
 
                     b.HasOne("BiletiApp.API.Models.Organization")
                         .WithMany("Gallery")
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Seat", b =>
                 {
-                    b.HasOne("BiletiApp.API.Models.Sector", "Sector")
+                    b.HasOne("BiletiApp.API.Models.Sector")
                         .WithMany("Seats")
-                        .HasForeignKey("SectorId");
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Sector", b =>
                 {
                     b.HasOne("BiletiApp.API.Models.Venue")
                         .WithMany("Sectors")
-                        .HasForeignKey("VenueId");
+                        .HasForeignKey("VenueId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BiletiApp.API.Models.Tag", b =>
@@ -313,7 +320,8 @@ namespace BiletiApp.API.Migrations
                 {
                     b.HasOne("BiletiApp.API.Models.BiletiEvent", "Event")
                         .WithMany()
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BiletiApp.API.Models.Seat", "Seat")
                         .WithMany()
@@ -324,7 +332,8 @@ namespace BiletiApp.API.Migrations
                 {
                     b.HasOne("BiletiApp.API.Models.Ticket", "Ticket")
                         .WithMany()
-                        .HasForeignKey("TicketId");
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BiletiApp.API.Models.User", "User")
                         .WithMany()
@@ -339,7 +348,8 @@ namespace BiletiApp.API.Migrations
 
                     b.HasOne("BiletiApp.API.Models.Organization", "Organization")
                         .WithMany()
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

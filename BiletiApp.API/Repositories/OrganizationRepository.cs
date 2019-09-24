@@ -16,17 +16,26 @@ namespace BiletiApp.API.Repositories
             DbContext = dbContext;
         }
 
-        public Organization getOrganizationById(Guid id) {
-            Organization organization = DbContext.Organizations.Where(x => x.Id == id).FirstOrDefault();
-
-            return organization;
-        }
+        
         public Organization addOrganization(Organization organization)
         {
             DbContext.Add(organization);
             DbContext.SaveChanges();
 
             return organization;
+        }
+
+        public Organization getOrganizationById(Guid id)
+        {
+            Organization organization = DbContext.Organizations.Where(x => x.Id == id).FirstOrDefault();
+
+            return organization;
+        }
+
+        public List<Organization> getAllOrganizations()
+        {
+            List<Organization> organizations = DbContext.Organizations.ToList();
+            return organizations;
         }
 
         public Organization updateOrganization(Organization organization) {

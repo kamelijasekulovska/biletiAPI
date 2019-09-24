@@ -23,6 +23,17 @@ namespace BiletiApp.API.Repositories
 
             return biletiEvent;
         }
+        public BiletiEvent getEventById(Guid id)
+        {
+            BiletiEvent biletiEvent = DbContext.BiletiEvents.Where(x => x.Id == id).FirstOrDefault();
+
+            return biletiEvent;
+        }
+        public List<BiletiEvent> getAllEvents()
+        {
+            List<BiletiEvent> biletiEvents = DbContext.BiletiEvents.ToList();
+            return biletiEvents;
+        }
 
         public BiletiEvent updateEvent(BiletiEvent biletiEvent)
         {
@@ -45,17 +56,7 @@ namespace BiletiApp.API.Repositories
             return false;
         }
 
-        public BiletiEvent getEventById(Guid id)
-        {
-            BiletiEvent biletiEvent = DbContext.BiletiEvents.Where(x => x.Id == id).FirstOrDefault();
-          
-            return biletiEvent;
-        }
-        public List<BiletiEvent> getAll()
-        {
-            List<BiletiEvent> biletiEvents = DbContext.BiletiEvents.ToList();
-            return biletiEvents;
-        }
+       
 
         public List<Ticket> getAllTicketsForSpecificEvent(Guid id) {
             //List<Transaction> transactions = DbContext.Transactions.Where(x => x.TransactionStatus == TransactionStatus.Available && ...).ToList();

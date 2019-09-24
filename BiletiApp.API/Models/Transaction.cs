@@ -7,7 +7,6 @@ namespace BiletiApp.API.Models
 {
     public enum TransactionStatus {
         Available,
-        Reserved,
         Pending,
         Confirmed
     }

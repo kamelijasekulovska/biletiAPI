@@ -9,10 +9,10 @@ namespace BiletiApp.API.IRepositories
     public interface IVenueRepository
     {
         Venue addVenue(Venue venue);
+        Venue getVenueById(Guid id);
+        List<Venue> getAllVenues();
         Venue updateVenue(Venue venue);
         bool deleteVenue(Guid id);
-        Venue getVenueById(Guid id);
-        List<Venue> getAll();
         List<BiletiEvent> getAllEventsForSpecificVenue(Guid id);
     }
 }

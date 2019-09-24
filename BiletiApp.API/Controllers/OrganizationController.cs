@@ -19,42 +19,115 @@ namespace BiletiApp.API.Controllers
             _organizationService = organizationService;
         }
 
-        [HttpGet("getOrganizationById")]
-        public ActionResult<Organization> getOrganizationById(Guid id) {
-            return _organizationService.getOrganizationById(id);
-        }
-
         //Create organization with necessary details
         [HttpPost("addOrganization")]
-        public ActionResult<Organization> addOrganization([FromBody]Organization organization) {
+        public ActionResult<Organization> addOrganization([FromBody]Organization organization)
+        {
             return _organizationService.addOrganization(organization);
         }
+
+        //Get organization by Id
+        [HttpGet("getOrganizationById/{id}")]
+        public ActionResult<Organization> getOrganizationById(Guid id) {
+            try
+            {
+                var organization = _organizationService.getOrganizationById(id);
+                if (organization == null)
+                {
+                    return NotFound();
+                }
+                return _organizationService.getOrganizationById(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            
+        }
+
+         //List all available organizations
+        [HttpGet("getAllOrganizations")]
+        public ActionResult<List<Organization>> getAllOrganizations()
+        {
+            try
+            {
+                var organizations = _organizationService.getAllOrganizations();
+                if (organizations.Count == 0)
+                {
+                    return NotFound();
+                }
+                return _organizationService.getAllOrganizations();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+           
+        }
+       
 
         //Update details for specific organization
         [HttpPut("updateOrganization")]
         public ActionResult<Organization> updateOrganization([FromBody]Organization organization) {
-            return _organizationService.updateOrganization(organization);
+            try
+            {
+                if (organization == null)
+                {
+                    return BadRequest("Organization object is null");
+                }
+                return _organizationService.updateOrganization(organization);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            
         }
 
         //Delete organization by id
         [HttpDelete("deleteOrganization/{id}")]
         public ActionResult<bool> deleteOrganization(Guid id)
         {
-            return _organizationService.deleteOrganization(id);
+            try
+            {
+                var organization = _organizationService.getOrganizationById(id);
+                if (organization == null)
+                {
+                    return NotFound();
+                }
+                return _organizationService.deleteOrganization(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            
         }
 
-        //List all available organizations
-        [HttpGet("getAll")]
-        public ActionResult<List<Organization>> getAll()
-        {
-            return _organizationService.getAll();
-        }
 
         //Get all events by orgaization
         [HttpGet("getAllEventsForSpecificOrganization/{id}")]
         public ActionResult<List<BiletiEvent>> getAllEventsForSpecificOrganization(Guid id)
         {
-            return _organizationService.getAllEventsForSpecificOrganization(id);
+            try
+            {
+                var organization = _organizationService.getOrganizationById(id);
+                var organizationEvents = _organizationService.getAllEventsForSpecificOrganization(id);
+                if (organization == null)
+                {
+                    return BadRequest("Invalid organization id");
+                }
+                if (organizationEvents.Count == 0)
+                {
+                    return BadRequest("The organization doesn't have any events");
+                }
+                return _organizationService.getAllEventsForSpecificOrganization(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+           
         }
     }
 }

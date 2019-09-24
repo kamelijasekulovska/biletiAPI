@@ -20,6 +20,15 @@ namespace BiletiApp.API.Services
         {
             return _venueRepository.addVenue(venue);
         }
+        public Venue getVenueById(Guid id)
+        {
+            return _venueRepository.getVenueById(id);
+        }
+
+        public List<Venue> getAllVenues()
+        {
+            return _venueRepository.getAllVenues();
+        }
 
         public bool deleteVenue(Guid id)
         {
@@ -30,15 +39,7 @@ namespace BiletiApp.API.Services
         {
             return _venueRepository.updateVenue(venue);
         }
-        public Venue getVenueById(Guid id)
-        {
-            return _venueRepository.getVenueById(id);
-        }
-
-        public List<Venue> getAll()
-        {
-            return _venueRepository.getAll();
-        }
+        
         public List<BiletiEvent> getAllEventsForSpecificVenue(Guid id)
         {
             return _venueRepository.getAllEventsForSpecificVenue(id);

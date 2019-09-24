@@ -26,6 +26,50 @@ namespace BiletiApp.API.Controllers
             return _eventService.addEvent(biletiEvent);
         }
 
+        //Get event by id
+        [HttpGet("getEventById/{id}")]
+        public ActionResult<BiletiEvent> getEventById(Guid id)
+        {
+            try
+            {
+                var biletiEvent = _eventService.getEventById(id);
+
+                if (biletiEvent == null)
+                {
+                    return NotFound();
+                }
+
+                return _eventService.getEventById(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+
+        }
+
+        //List all available events
+        [HttpGet("getAllEvents")]
+        public ActionResult<List<BiletiEvent>> getAllEvents()
+        {
+            try
+            {
+                var biletiEvents = _eventService.getAllEvents();
+
+                if (biletiEvents.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return _eventService.getAllEvents();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
         //Update event data, tickets, and seats details
         [HttpPut("updateEvent")]
         public ActionResult<BiletiEvent> updateEvent([FromBody]BiletiEvent biletiEvent) {
@@ -69,52 +113,6 @@ namespace BiletiApp.API.Controllers
             }
         }
 
-        
-            
-        
-        //Get event by id
-        [HttpGet("getEventById/{id}")]
-        public ActionResult<BiletiEvent> getEventById(Guid id)
-        {
-            try
-            {
-                var biletiEvent = _eventService.getEventById(id);
-                
-                if (biletiEvent == null)
-                {
-                    return NotFound();
-                }
-
-                return _eventService.getEventById(id);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-           
-        }
-
-        //List all available events
-        [HttpGet("getAll")]
-        public ActionResult<List<BiletiEvent>> getAll()
-        {
-            try
-            {
-                var biletiEvents = _eventService.getAll();
-
-                if (biletiEvents == null)
-                {
-                    return NotFound();
-                }
-
-                return _eventService.getAll();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-        }
-        
 
         //List all ticket per event
         [HttpGet("getAllTicketsForSpecificEvent/{id}")]

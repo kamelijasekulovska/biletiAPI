@@ -21,12 +21,7 @@ namespace BiletiApp.API.Controllers
             _ticketService = ticketService;
         }
 
-        //Get ticket by id with necessary details
-        [HttpGet("getTicketById/{id}")]
-        public ActionResult<Ticket> getTicketById(Guid id)
-        {
-            return _ticketService.getTicketById(id);
-        }
+       
 
         [HttpPost("addTicket")]
         public ActionResult<Ticket> addTicket(Ticket ticket)
@@ -56,6 +51,26 @@ namespace BiletiApp.API.Controllers
         public ActionResult<bool> confirm(Ticket ticket)
         {
             return _ticketService.confirm(ticket);
+        }
+
+        //Get ticket by id with necessary details
+        [HttpGet("getTicketById/{id}")]
+        public ActionResult<Ticket> getTicketById(Guid id)
+        {
+            try
+            {
+                var ticket = _ticketService.getTicketById(id);
+                if (ticket == null)
+                {
+                    return NotFound();
+                }
+                return _ticketService.getTicketById(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+          
         }
     }
 } 

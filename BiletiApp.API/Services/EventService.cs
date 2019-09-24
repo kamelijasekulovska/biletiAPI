@@ -21,6 +21,15 @@ namespace BiletiApp.API.Services
             return _eventRepository.addEvent(biletiEvent);
         }
 
+        public BiletiEvent getEventById(Guid id)
+        {
+            return _eventRepository.getEventById(id);
+        }
+        public List<BiletiEvent> getAllEvents()
+        {
+            return _eventRepository.getAllEvents();
+        }
+
         public BiletiEvent updateEvent(BiletiEvent biletiEvent)
         {
             return _eventRepository.updateEvent(biletiEvent);
@@ -29,15 +38,6 @@ namespace BiletiApp.API.Services
         public bool deleteEvent(Guid id)
         {
             return _eventRepository.deleteEvent(id);
-        }
-
-        public BiletiEvent getEventById(Guid id)
-        {
-            return _eventRepository.getEventById(id);
-        }
-        public List<BiletiEvent> getAll()
-        {
-            return _eventRepository.getAll();
         }
 
         public List<Ticket> getAllTicketsForSpecificEvent(Guid id)

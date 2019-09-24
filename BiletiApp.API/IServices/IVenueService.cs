@@ -9,11 +9,10 @@ namespace BiletiApp.API.IServices
     public interface IVenueService
     {
         Venue addVenue(Venue venue);
+        Venue getVenueById(Guid id);
+        List<Venue> getAllVenues();
         Venue updateVenue(Venue venue);
         bool deleteVenue(Guid id);
-        Venue getVenueById(Guid id);
-        List<Venue> getAll();
-
         List<BiletiEvent> getAllEventsForSpecificVenue(Guid id);
     }
 }

@@ -15,7 +15,7 @@ namespace BiletiApp.API.Models
         public Image[] Images { get; set; }
         public string Cover { get; set; }
         public int Max_tickets_per_account { get; set; }
-        public Organization Organization { get; set; }
+        public Organization Organization { get; set; } 
         public Venue Venue { get; set; }
 
     }

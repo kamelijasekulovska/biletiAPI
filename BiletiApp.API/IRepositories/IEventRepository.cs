@@ -9,10 +9,10 @@ namespace BiletiApp.API.IRepositories
     public interface IEventRepository
     {
         BiletiEvent addEvent(BiletiEvent biletiEvent);
+        BiletiEvent getEventById(Guid id);
+        List<BiletiEvent> getAllEvents();
         BiletiEvent updateEvent(BiletiEvent biletiEvent);
         bool deleteEvent(Guid id);
-        BiletiEvent getEventById(Guid id);
-        List<BiletiEvent> getAll();
         List<Ticket> getAllTicketsForSpecificEvent(Guid id);
     }
 }

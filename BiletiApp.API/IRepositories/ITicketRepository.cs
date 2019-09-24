@@ -8,8 +8,8 @@ namespace BiletiApp.API.IRepositories
 {
     public interface ITicketRepository
     {
-        Ticket getTicketById(Guid id);
         Ticket addTicket(Ticket ticket);
+        Ticket getTicketById(Guid id);
         bool reserveTicket(Transaction transaction);
         bool purchaseTicket(Transaction transaction);
         bool invite(Ticket ticket, string email);

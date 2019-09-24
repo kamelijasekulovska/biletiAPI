@@ -27,39 +27,107 @@ namespace BiletiApp.API.Controllers
             return _venueService.addVenue(venue);
         }
 
+        //Get venue by id
+        [HttpGet("getVenueById/{id}")]
+        public ActionResult<Venue> getVenueById(Guid id)
+        {
+            try
+            {
+                var venue = _venueService.getVenueById(id);
+                if(venue == null)
+                {
+                    return NotFound();
+                }
+                return _venueService.getVenueById(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            
+        }
+
+        //List all available venues
+        [HttpGet("getAllVenues")]
+        public ActionResult<List<Venue>> getAllVenues()
+        {
+            try
+            {
+                var venues = _venueService.getAllVenues();
+                if(venues.Count == 0)
+                {
+                    return NotFound();
+                }
+                return _venueService.getAllVenues();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            
+        }
         //Update venue details
         [HttpPut("updateVenue")]
         public ActionResult<Venue> updateVenue([FromBody]Venue venue)
         {
-            return _venueService.updateVenue(venue);
+            try
+            {
+                if(venue == null)
+                {
+                    return BadRequest("Venue object is null");
+                }
+                return _venueService.updateVenue(venue);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            
         }
 
         //Delete venue by id
         [HttpDelete("deleteVenue/{id}")]
         public ActionResult<bool> deleteVenue(Guid id)
         {
-            return _venueService.deleteVenue(id);
+            try
+            {
+                var venue = _venueService.getVenueById(id);
+               if (venue == null)
+                {
+                    return NotFound();
+                }
+                return _venueService.deleteVenue(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+           
         }
 
-        //Get venue by id
-        [HttpGet("getVenueById/{id}")]
-        public ActionResult<Venue> getVenueById(Guid id)
-        {
-            return _venueService.getVenueById(id);
-        }
-
-        //List all available venues
-        [HttpGet("getAll")]
-        public ActionResult<List<Venue>> getAll()
-        {
-            return _venueService.getAll();
-        }
 
         //Get list of events by venue
         [HttpGet("getAllEventsForSpecificVenue/{id}")]
         public ActionResult<List<BiletiEvent>> getAllEventsForSpecificVenue(Guid id) {
-
-            return _venueService.getAllEventsForSpecificVenue(id);
+            try
+            {
+                var venue = _venueService.getVenueById(id);
+                var venueEvents = _venueService.getAllEventsForSpecificVenue(id);
+                if(venue == null)
+                {
+                    return BadRequest("Invalid venue id");
+                }
+                if(venueEvents.Count == 0)
+                {
+                    return BadRequest("This venue doesn't have any events");
+                }
+                return _venueService.getAllEventsForSpecificVenue(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            
         }
     }
 }
