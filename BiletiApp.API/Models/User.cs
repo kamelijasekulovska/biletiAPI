@@ -14,8 +14,10 @@ namespace BiletiApp.API.Models
     {
         public Guid Id { get; set; }
         public Contact Contact { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
         public Organization Organization { get; set; }
         public UserRole UserRole { get; set; }
+        public string Token { get; set; }
     }
 }

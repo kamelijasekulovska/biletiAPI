@@ -1,8 +1,13 @@
 ﻿using BiletiApp.API.IRepositories;
 using BiletiApp.API.Models;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BiletiApp.API.Repositories
@@ -10,10 +15,12 @@ namespace BiletiApp.API.Repositories
     public class UserRepository : IUserRepository
     {
         protected readonly BiletiDbContext DbContext;
+        private readonly TokenManagement _tokenManagement;
 
-        public UserRepository(BiletiDbContext dbContext)
+        public UserRepository(BiletiDbContext dbContext, IOptions<TokenManagement> tokenManagement)
         {
             DbContext = dbContext;
+            _tokenManagement = tokenManagement.Value;
         }
 
 
@@ -42,7 +49,28 @@ namespace BiletiApp.API.Repositories
         public User login(string email, string password)
         {
             //ova ne e dobro treba da se napravi
-            User user = DbContext.Users.Where(x => x.Contact.Email == email).FirstOrDefault();
+            //User user = DbContext.Users.Where(x => x.Contact.Email == email).FirstOrDefault();
+
+            var user = DbContext.Users.SingleOrDefault(x => x.Username == email && x.Password == password);
+
+            if(user == null)
+            {
+                return null;
+            }
+
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));
+            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+            var tokeOptions = new JwtSecurityToken(
+                issuer: _tokenManagement.Issuer,
+                audience: _tokenManagement.Audience,
+                claims: new List<Claim>(),
+                expires: DateTime.Now.AddMinutes(_tokenManagement.AccessExpiration),
+                signingCredentials: signinCredentials
+            );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            user.Token = tokenString;
 
             return user;
         }
