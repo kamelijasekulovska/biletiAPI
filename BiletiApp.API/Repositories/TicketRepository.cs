@@ -25,6 +25,11 @@ namespace BiletiApp.API.Repositories
 
         public Ticket addTicket(Ticket ticket)
         {
+            var bEvent = DbContext.BiletiEvents.Where(x => x.Id == ticket.Event.Id).FirstOrDefault();
+            ticket.Event = bEvent;
+
+            var seat = DbContext.Seats.Where(x => x.Id == ticket.Seat.Id).FirstOrDefault();
+            ticket.Seat = seat;
             DbContext.Add(ticket);
 
             Transaction transaction = new Transaction();
