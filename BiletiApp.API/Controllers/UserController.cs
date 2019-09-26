@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BiletiApp.API.IServices;
 using BiletiApp.API.Models;
 using BiletiApp.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace BiletiApp.API.Controllers
     {
         private IUserService _userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -29,9 +30,9 @@ namespace BiletiApp.API.Controllers
         }
         //User login and token issuing
         [HttpPost("login")]
-        public ActionResult<User> login(string email, string password)
+        public ActionResult<User> login([FromBody] User user)
         {
-            return _userService.login(email, password);
+            return _userService.login(user.Username, user.Password);
         }
 
         // Update user details

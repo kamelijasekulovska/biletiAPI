@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using BiletiApp.API.IServices;
 using BiletiApp.API.Models;
 using BiletiApp.API.Repositories;
 using BiletiApp.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,6 +20,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BiletiApp.API
 {
@@ -37,6 +40,31 @@ namespace BiletiApp.API
 
             services.AddDbContext<BiletiDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
+            var token = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
+            var secret = Encoding.ASCII.GetBytes(token.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(token.Secret)),
+                    ValidIssuer = token.Issuer,
+                    ValidAudience = token.Audience,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+
 
             var builder = new ContainerBuilder();
             builder.RegisterType<UserService>().As<IUserService>();
@@ -67,6 +95,9 @@ namespace BiletiApp.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseMvc();
