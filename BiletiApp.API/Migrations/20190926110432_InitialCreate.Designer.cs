@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiletiApp.API.Migrations
 {
     [DbContext(typeof(BiletiDbContext))]
-    [Migration("20190924091640_InitialCreate")]
+    [Migration("20190926110432_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -230,7 +230,11 @@ namespace BiletiApp.API.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<string>("Token");
+
                     b.Property<int>("UserRole");
+
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 

@@ -228,7 +228,11 @@ namespace BiletiApp.API.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<string>("Token");
+
                     b.Property<int>("UserRole");
+
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 
